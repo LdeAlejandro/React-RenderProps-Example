@@ -1,25 +1,35 @@
-import React, { useEffect, useState } from 'react';
+
 import './App.css';
-import { ThemeContext, themes } from './Theme';
-import Card from './Card';
+import Counter from './Counter';
+
+const Buttons = ( {increment, decrement, count})=>(
+  <div>
+    <h1>
+      Valor atual {count}
+    </h1>
+    <div>
+      <button onClick={increment}>Incrementar</button>
+      </div>
+      <div>
+      <button onClick={decrement}>Decrementar</button>
+    </div>
+  </div>
+)
 
 function App() {
 
-  const [token, setToken] = useState();
-
-  useEffect(() => {
-      setTimeout(() => {
-          setToken('asdasdasd') 
-          //console.log('set token: ', token)
-      }, 4000)
-      
-  }, [setToken])
-
   return (
-    <ThemeContext.Provider value={{...themes.primary, token}}>
-      <Card/>
-          App
-    </ThemeContext.Provider>
+   <div>
+    <Counter render={
+      ({increment, decrement, count}) => (
+        <Buttons 
+          increment={increment} 
+          decrement={decrement} 
+          count={count}/>
+      )}>
+
+      </Counter> 
+   </div>
   );
 }
 
